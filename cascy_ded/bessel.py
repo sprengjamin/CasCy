@@ -13,7 +13,7 @@ denoted as :math:`\tilde{I}_{n}(z)` and :math:`\tilde{K}_{n}(z)`, respectively. 
 where :math:`\eta(n, z)=\sqrt{n^2 + z^2} - n \asinh(n/z)` and :math:`I_n` and :math:`K_n` are the modified Bessel
 function of the first and second kind, respectively. This definition of the exponentially scaled versions of the
 modified Bessel functions is motivated by the uniform asymptotic expansions of the modified Bessel functions for large
-order. In this way, the functions are numerically behaved even if the order or the argument becomes very large.
+order. In this way, the functions are numerically well-behaved even if the order or the argument becomes very large.
 """
 import numpy as np
 from math import exp, sqrt, log1p, asinh
@@ -25,20 +25,19 @@ def fraction(nu, x):
     .. math::
         \frac{I_\nu(x)}{I_{\nu+1}(x)}
 
-    where :math:`I_\nu` is the modified Bessel function of the first kind of
-    order :math:`\nu`.
+    where :math:`I_\nu` is the modified Bessel function of the first kind of order :math:`\nu`.
 
     Parameters
     ----------
     nu : float
-        Order
+        Order.
     x : float
-        Argument
+        Argument.
 
     Returns
     -------
-    float
-
+    frac : float
+        Fraction of modified Bessel functions.
     """
     invx = 1/x
 
@@ -68,15 +67,15 @@ def delta(n, z, j):
     Parameters
     ----------
     n : order
-        index
+        Index.
     z : float
-        argument
+        Argument.
     j : integer
-        difference of orders
+        Difference of orders.
 
     Returns
     -------
-    float
+    delta : float
 
     """
     s1 = sqrt(n**2 + z**2)
@@ -94,17 +93,19 @@ def Knp1(Knm1, Kn, n, z):
     Parameters
     ----------
     Knm1 : float
-        exponentially scaled Bessel function :math:`K_{n-1}(z)`
+        Exponentially scaled Bessel function :math:`K_{n-1}(z)`.
     Kn : float
-        exponentially scaled Bessel function :math:`K_{n}(z)`
+        Exponentially scaled Bessel function :math:`K_{n}(z)`.
     n : integer
-        order
+        Order
     z : float
-        argument
+        Argument
 
     Returns
     -------
-    float
+    Knp1 : float
+        Exponentially scaled Bessel function :math:`K_{n+1}(z)`.
+
 
     """
     return 2*n/z*Kn*delta(n, z, 1) + Knm1*delta(n-1, z, 2)
@@ -118,9 +119,9 @@ def Inm1(In, Inp1, n, z):
     Parameters
     ----------
     In : float
-        exponentially scaled Bessel function :math:`I_{n}(z)`
+        Exponentially scaled Bessel function :math:`I_{n}(z)`.
     Inp1 : float
-        exponentially scaled Bessel function :math:`I_{n+1}(z)
+        Exponentially scaled Bessel function :math:`I_{n+1}(z)`.
     n : integer
         order
     z : float
@@ -128,7 +129,9 @@ def Inm1(In, Inp1, n, z):
 
     Returns
     -------
-    float
+    Inm1 : float
+        Exponentially scaled Bessel function :math:`I_{n-1}(z)`.
+
 
     """
     return 2*n/z*In*delta(n-1, z, 1) + Inp1*delta(n-1, z, 2)
@@ -136,7 +139,7 @@ def Inm1(In, Inp1, n, z):
 def bessel_array(nmax, z):
     r"""
     Calculates arrays for the exponentially scaled Bessel functions of first and second kind and their derivatives.
-    The arrays contain the Bessel functions for orders from :math:`n=0` to :math:`nmax`.
+    The arrays contain the Bessel functions for orders from :math:`n=0` to `nmax`.
     The function returns the four arrays as a tuple with the ordering corresponding to
     (:math:`\tilde{I}_{n}(z)`, :math:`\tilde{I}_{n}'(z)`, :math:`\tilde{K}_{n}(z)`, :math:`\tilde{K}_{n}'(z)`).
 
@@ -153,7 +156,6 @@ def bessel_array(nmax, z):
 
 
     """
-    # compute Kn and Kn' from n=0 to nmax
     Kn = np.empty(nmax+3)
     In = np.empty(nmax+2)
     Knprime = np.empty(nmax+1)
