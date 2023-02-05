@@ -1,0 +1,15 @@
+build/
+dist/
+cascy_ded.egg-info/
+
+
+__pycache__/
+.idea/
+*.html
+*.c
+*.so
+*.swp
+*.kate-swp
+*.pstat
+*.png
+test.py

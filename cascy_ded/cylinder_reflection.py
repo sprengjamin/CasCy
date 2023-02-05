@@ -7,8 +7,9 @@ half-space.
 """
 
 import numpy as np
-from math import exp, sqrt, sinh, cosh, asinh, acosh
+from math import exp, sqrt, cosh, acosh
 from .bessel import bessel_array
+from .scattering_amplitude import scattering_amplitude
 
 def pwrc_TMTM(m_max, kR):
     r"""
@@ -44,83 +45,7 @@ def pwrc_TMTM(m_max, kR):
     return np.pi/2*Imp/Kmp
 
 
-def expo_diff(m, kR, u, expo):
-    # helper function
-    return exp(2*sqrt(m**2 + kR**2) - 2*m*asinh(m/kR) + m*u - expo)
 
-
-def T_term(n, kR, u, expo, pwrc):
-    # helper function
-    # n>0
-    ed = expo_diff(n, kR, u, expo)
-    return (1+exp(-2*n*u))*pwrc*ed
-
-
-def scattering_amplitude(kR, u, m_max, pwrc):
-    r"""
-    Exponentially scaled plane-wave scattering amplitudes at zero-frequency for TM-TM polarization at zero frequency.
-    The scattering amplitudes are defined as
-
-    .. math::
-        T = a_0 + 2 \sum_{m=0}^\infty a_m \cos(m\Theta)
-
-    with :math:`\Theta` being the projection of the scattering angle into the plane perpendicular to the cylinder axis
-    and :math:`a_m` the partial-wave reflection coefficients. The parameter `u` is related to :math:`\Theta` by
-    the relation :math:`\cosh(u)=-\cos(\Theta)`. The exponentially scaled plane-wave scattering amplitude is then
-    defined as
-    .. math::
-        i T\exp(-2 k R \cosh(u/2))\,.
-
-    Parameters
-    ----------
-    kR : float
-        Product of wave vector component along the cylinder axis and the cylinder radius.
-    u : float
-        Parameter related to the projection of the scattering angle perpendicular to the cylinder axis.
-    m_max : integer
-        Maximum order of index :math:`m`.
-    pwrc : list
-        List of partial-wave reflection coefficients of length `m_max + 1`.
-
-    Returns
-    -------
-    T : float
-        Exponentially scaled plane-wave scattering amplitude.
-
-    """
-    expo = 2 * kR * cosh(u / 2)
-
-    m_init = min(int(kR * sinh(u / 2)), m_max)
-
-    if m_init == 0:
-        T = pwrc[0] * expo_diff(0, kR, u, expo)
-    else:
-        T = T_term(m_init, kR, u, expo, pwrc[m_init])
-        T += pwrc[0] * expo_diff(0, kR, u, expo)
-
-    if T == 0.:
-        # prevent zero-division error, this happens typically when n_init >> nmax
-        return 0.
-
-    # upward summation
-    m = m_init + 1
-    while (m < m_max + 1):
-        Tt = T_term(m, kR, u, expo, pwrc[m])
-        T += Tt
-        if abs(Tt / T) < 1.e-16:
-            break
-        m += 1
-
-    # downward summation
-    m = m_init - 1
-    while (m > 0):
-        Tt = T_term(m, kR, u, expo, pwrc[m])
-        T += Tt
-        if abs(Tt / T) < 1.e-16:
-            return T
-        m -= 1
-
-    return T
 
 
 def pwrme(R, k, Kxi, Kxs, m_max, pwrc):
