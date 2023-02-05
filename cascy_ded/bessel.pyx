@@ -18,7 +18,9 @@ order. In this way, the functions are numerically well-behaved even if the order
 import numpy as np
 from libc.math cimport exp, sqrt, log1p, asinh
 from scipy.special.cython_special cimport k0e, k1e, i0e, i1e
+from cython import cdivision
 
+@cdivision(True)
 cdef double fraction(double nu, double x):
     r"""Returns the fraction
 
@@ -60,7 +62,7 @@ cdef double fraction(double nu, double x):
         ratio_last = ratio
         l += 1
 
-
+@cdivision(True)
 cdef double delta(int n, double z, int j):
     r"""
     Helper function to calculate the exponentially scaled modified Bessel functions.
@@ -85,7 +87,7 @@ cdef double delta(int n, double z, int j):
     cdef double e = d + n*log1p(-(d+j)/(n+j+s2)) - j*asinh((n+j)/z)
     return exp(e)
 
-
+@cdivision(True)
 cdef double Knp1(double Knm1, double Kn, int n, double z):
     r"""
     Implementation of upward recurrence for exponentially scaled modified Bessel function of the second kind.
