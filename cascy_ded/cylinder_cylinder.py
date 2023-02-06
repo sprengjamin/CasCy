@@ -33,8 +33,8 @@ class cylinder_cylinder_system:
                 Casimir energy in units of :math:`k_B T`.
 
         """
-        rho1 = max(self.R1 / self.L, 50.)
-        rho2 = max(self.R2 / self.L, 50.)
+        rho1 = max(self.R1 / self.d, 50.)
+        rho2 = max(self.R2 / self.d, 50.)
         rho = max(rho1, rho2)
         if Nx == None:
             Nx = int(eta_Nx * np.sqrt(rho))
@@ -50,7 +50,7 @@ class cylinder_cylinder_system:
         Kx = X2 / self.d
         Wx = W2 / self.d
 
-        result = 0.
+        energy_per_length = 0.
         for i, kz in enumerate(Kz):
             # cylider reflection
             pwrc1 = pwrc_TMTM(mmax, kz * self.R1)
@@ -71,7 +71,7 @@ class cylinder_cylinder_system:
             M = M1 @ M2
 
             # energy contribution
-            result += Wz[i] / 2 / np.pi * logdet1m(M)
-        return self.d/self.L*result
+            energy_per_length += Wz[i] / 2 / np.pi * logdet1m(M)
+        return self.L*energy_per_length
 
 

@@ -32,7 +32,7 @@ class plane_cylinder_system:
                 Casimir energy in units of :math:`k_B T`.
 
         """
-        rho = max(self.R / self.L, 50.)
+        rho = max(self.R  / self.d, 50.)
         if Nx == None:
             Nx = int(eta_Nx * np.sqrt(rho))
         if mmax == None:
@@ -47,7 +47,7 @@ class plane_cylinder_system:
         Kx = X2 / self.d
         Wx = W2 / self.d
 
-        result = 0.
+        energy_per_length = 0.
         for i, kz in enumerate(Kz):
             # cylider reflection
             pwrc = pwrc_TMTM(mmax, kz * self.R)
@@ -61,7 +61,7 @@ class plane_cylinder_system:
             M = np.diag(translation) @ R_cy @ np.diag(-1. * translation)
 
             # energy contribution
-            result += Wz[i] / 2 / np.pi * logdet1m(M)
-        return self.d/self.L*result
+            energy_per_length += Wz[i] / 2 / np.pi * logdet1m(M)
+        return self.L*energy_per_length
 
 
