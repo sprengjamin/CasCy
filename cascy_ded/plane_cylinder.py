@@ -15,7 +15,7 @@ class plane_cylinder_system:
         self.x_quad = fcqs_combined
         self.z_quad = fcqs_semiinfinite
 
-    def calculate_casimir_energy(self, eta_Nx=4., Nx=None, Nz=40, eta_mmax=10., mmax=None):
+    def calculate_casimir_energy(self, eta_Nx=2., Nx=None, Nz=20, eta_mmax=10., mmax=None):
         r"""
             Casimir energy between a cylinder (radius `R`, length `L`) and a plane at separation `d` in units of :math:`k_B T`.
 
