@@ -1,8 +1,7 @@
 build/
 dist/
 cascy_ded.egg-info/
-
-
+env/
 __pycache__/
 .idea/
 *.html
