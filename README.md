@@ -1,5 +1,5 @@
-# cascy-ded
-A package to calculate the Casimir energy between two parallel, dielectric cylinders of arbitrary radii (R1 and R2) immersed in an electrolyte solution.
+# CasCy
+A package to calculate the **Cas**imir energy between two parallel, dielectric **cy**linders of arbitrary radii (R1 and R2) immersed in an electrolyte solution.
 The Casimir energy is calculated within the scattering theory using plane waves as a basis for the electromagnetic modes.
 In this code, the so-called zero-frequency contribution to the Casimir energy is calculated, which becomes exact at large temperatures or
 separations larger than the thermal wave-length.
