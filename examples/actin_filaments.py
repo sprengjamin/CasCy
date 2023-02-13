@@ -8,12 +8,15 @@ from CasCy.cylinder_cylinder import cylinder_cylinder_system
 
 
 # set parameters
-D = np.linspace(3, 20, 50)*1.e-9 # in m
+D = np.linspace(3.7, 20, 100)*1.e-9 # in m
 R = 3.e-9    # in m
 L = 15.e-6    # in m
 
 # calculate energies
 results = [-cylinder_cylinder_system(d, R, R, L).calculate_casimir_energy() for d in D]
+
+# save data to file
+# np.savetxt('figure2A.csv', np.vstack((D, results)).T, delimiter=',', header='d (nm), ΔF/kB T')
 
 # plot results
 f, ax = plt.subplots()
