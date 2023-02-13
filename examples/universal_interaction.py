@@ -4,7 +4,7 @@ larger than the separation between them.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from cascy_ded.cylinder_cylinder import cylinder_cylinder_system
+from CasCy.cylinder_cylinder import cylinder_cylinder_system
 
 
 # set parameters

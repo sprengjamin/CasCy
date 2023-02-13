@@ -8,7 +8,7 @@ requires = [
 ]
 
 [project]
-name = "cascy_ded"
+name = "CasCy"
 authors = [
     {name = "Benjamin Spreng", email = "sprengjamin@gmail.com"},
 ]

@@ -8,8 +8,8 @@ The full results may take a few minutes to calculate and are saved as png-files.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from cascy_ded.plane_cylinder import plane_cylinder_system
-from cascy_ded.cylinder_cylinder import cylinder_cylinder_system
+from CasCy.plane_cylinder import plane_cylinder_system
+from CasCy.cylinder_cylinder import cylinder_cylinder_system
 
 print('Plane-cylinder geometry:')
 R = [0.01, 0.1, 1, 10, 100]

@@ -20,7 +20,7 @@ def pwrc_TMTM(m_max, kR):
     .. math::
         e^{-2\eta(n, z) } |\braket{m, \text{TM} | \mathcal{R} | m, \text{TM}}|
 
-    where :math:`\eta(n, z)=\sqrt{n^2 + z^2} - n \asinh(n/z)` and
+    where :math:`\eta(n, z)=\sqrt{n^2 + z^2} - n \operatorname{asinh}(n/z)` and
 
     .. math::
         \braket{m, \text{TM} | \mathcal{R} | m, \text{TM}} = -\frac{i\pi}{2}(-1)^m \frac{I_m'(k R)}{K_m'(k R)}
@@ -104,7 +104,7 @@ def reflection_matrix(R, k, Kx, Wx, m_max, pwrc):
     Discretized plane-wave reflection matrix at cylinder. The matrix elements are given by
 
     .. math::
-        M_{ij} = \frac{\sqrt{\mathtt{Wx[i]} \mathtt{Wx[j]}}}{2\pi}\mathtt{pwrme(R, k, Kx[j], Kx[i], m_max, pwrc)}\,.
+        M_{ij} = \frac{\sqrt{\mathtt{Wx[i]} \mathtt{Wx[j]}}}{2\pi}\mathtt{pwrme}(\mathtt{R}, \mathtt{k}, \mathtt{Kx[j]}, \mathtt{Kx[i]}, \mathtt{m\_max}, \mathtt{pwrc})\,.
 
     Parameters
     ----------
@@ -121,6 +121,8 @@ def reflection_matrix(R, k, Kx, Wx, m_max, pwrc):
 
     Returns
     -------
+    R : numpy.ndarray
+        reflection matrix
 
     """
     Nx = len(Kx)

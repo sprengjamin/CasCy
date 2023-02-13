@@ -10,7 +10,7 @@ denoted as :math:`\tilde{I}_{n}(z)` and :math:`\tilde{K}_{n}(z)`, respectively. 
         \tilde{K}_{n}(z) = e^{\eta(n, z)} K_n(z)
 
 
-where :math:`\eta(n, z)=\sqrt{n^2 + z^2} - n \asinh(n/z)` and :math:`I_n` and :math:`K_n` are the modified Bessel
+where :math:`\eta(n, z)=\sqrt{n^2 + z^2} - n \operatorname{asinh}(n/z)` and :math:`I_n` and :math:`K_n` are the modified Bessel
 function of the first and second kind, respectively. This definition of the exponentially scaled versions of the
 modified Bessel functions is motivated by the uniform asymptotic expansions of the modified Bessel functions for large
 order. In this way, the functions are numerically well-behaved even if the order or the argument becomes very large.
@@ -18,7 +18,7 @@ order. In this way, the functions are numerically well-behaved even if the order
 import numpy as np
 from libc.math cimport exp, sqrt, log1p, asinh
 from scipy.special.cython_special cimport k0e, k1e, i0e, i1e
-from cython import cdivision
+from cython import cdivision, embedsignature
 
 @cdivision(True)
 cdef double fraction(double nu, double x):
@@ -113,7 +113,7 @@ cdef double Knp1(double Knm1, double Kn, int n, double z):
     """
     return 2*n/z*Kn*delta(n, z, 1) + Knm1*delta(n-1, z, 2)
 
-
+@embedsignature(True)
 cpdef bessel_array(int nmax, double z):
     r"""
     Calculates arrays for the exponentially scaled Bessel functions of first and second kind and their derivatives.
@@ -130,7 +130,7 @@ cpdef bessel_array(int nmax, double z):
 
     Returns
     -------
-    (nd.array, nd.array, nd.array, nd.array)
+    (numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray)
 
 
     """

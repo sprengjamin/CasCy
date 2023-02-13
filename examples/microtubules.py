@@ -4,7 +4,7 @@ for separations from 15 to 60 nm.
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from cascy_ded.cylinder_cylinder import cylinder_cylinder_system
+from CasCy.cylinder_cylinder import cylinder_cylinder_system
 
 
 # set parameters

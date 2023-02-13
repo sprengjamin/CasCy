@@ -4,7 +4,7 @@ We calculate the Casimir binding energy in units of kB*T for two parallel actin 
 """
 import matplotlib.pyplot as plt
 import numpy as np
-from cascy_ded.cylinder_cylinder import cylinder_cylinder_system
+from CasCy.cylinder_cylinder import cylinder_cylinder_system
 
 
 # set parameters

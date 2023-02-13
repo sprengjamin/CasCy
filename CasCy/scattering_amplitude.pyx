@@ -1,5 +1,7 @@
+"""Exponentially scaled plane-wave scattering amplitudes at zero-frequency for TM-TM polarization at zero frequency.
+"""
 from libc.math cimport exp, sqrt, sinh, cosh, asinh
-from cython import cdivision, boundscheck
+from cython import cdivision, boundscheck, embedsignature
 
 @cdivision(True)
 cdef double expo_diff(int m, double kR, double u, double expo):
@@ -15,6 +17,7 @@ cdef double T_term(int n, double kR, double u, double expo, double pwrc):
 
 @cdivision(True)
 @boundscheck(False)
+@embedsignature(True)
 cpdef scattering_amplitude(double kR, double u, int m_max, double[:] pwrc):
     r"""
     Exponentially scaled plane-wave scattering amplitudes at zero-frequency for TM-TM polarization at zero frequency.
@@ -27,6 +30,7 @@ cpdef scattering_amplitude(double kR, double u, int m_max, double[:] pwrc):
     and :math:`a_m` the partial-wave reflection coefficients. The parameter `u` is related to :math:`\Theta` by
     the relation :math:`\cosh(u)=-\cos(\Theta)`. The exponentially scaled plane-wave scattering amplitude is then
     defined as
+    
     .. math::
         i T\exp(-2 k R \cosh(u/2))\,.
 
