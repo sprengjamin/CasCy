@@ -1,36 +1,94 @@
-"""
-We calculate the Casimir energy within the scattering formalism utilizing plane waves.
-"""
 import numpy as np
 from .quadratures import fcqs_combined, fcqs_semiinfinite
 from .cylinder_reflection import pwrc_TMTM, reflection_matrix
 from .matrix_operations import logdet1m
 
 class cylinder_cylinder_system:
-    def __init__(self, d, R1, R2, L):
+    r"""
+    A class to represent the cylinder-cylinder geometry.
+
+    Attributes
+    ----------
+    d : float
+        separation between plane and cylinder
+    R1, R2 : float
+        cylinder radii
+    L : float
+        cylinder length
+    x_quad : function
+        Quadrature scheme for x integration over the interval (-oo, oo).
+        The function has the signature `function(int)->(list, list)`, where the return values are the nodes and weights
+        of the quadrature scheme, respectively. The default value is`fcqs_combined` (see module `quadratures.py`).
+    z_quad : function
+        Quadrature scheme for z integration over the interval (0, oo).
+        The function has the signature `function(int)->(list, list)`, where the return values are the nodes and weights
+        of the quadrature scheme, respectively. The default value is`fcqs_semiinfinite` (see module `quadratures.py`).
+
+    Methods
+    -------
+    calculate_casimir_energy(eta_Nx=2., Nx=None, Nz=20, eta_mmax=10., mmax=None) -> float
+        Calculates the Casimir energy in units of :math:`k_B T` for the defined geometry.
+    """
+    def __init__(self, d, R1, R2, L, x_quad=fcqs_combined, z_quad=fcqs_semiinfinite):
+        """
+        Constructs all the necessary attributes of the cylinder-cylinder object.
+
+        Parameters
+        ----------
+        d : float
+            separation between plane and cylinder
+        R1, R2 : float
+            cylinder radii
+        L : float
+            cylinder length
+        x_quad : function
+            Quadrature scheme for x integration over the interval (-oo, oo).
+            The function has the signature `function(int)->(list, list)`, where the return values are the nodes and weights
+            of the quadrature scheme, respectively. The default value is`fcqs_combined` (see module `quadratures.py`).
+        z_quad : function
+            Quadrature scheme for z integration over the interval (0, oo).
+            The function has the signature `function(int)->(list, list)`, where the return values are the nodes and weights
+            of the quadrature scheme, respectively. The default value is`fcqs_semiinfinite` (see module `quadratures.py`).
+        """
         self.d = d
         self.R1 = R1
         self.R2 = R2
         self.L = L
-
-        self.x_quad = fcqs_combined
-        self.z_quad = fcqs_semiinfinite
+        self.x_quad = x_quad
+        self.z_quad = z_quad
 
     def calculate_casimir_energy(self, eta_Nx=4., Nx=None, Nz=20, eta_mmax=10., mmax=None):
         r"""
-            Casimir energy between a cylinder (radius `R`, length `L`) and a plane at separation `d` in units of :math:`k_B T`.
+        Calculates the Casimir energy in units of :math:`k_B T` for the defined geometry.
 
-            Parameters
-            ----------
-            d : float
-                Separation.
-            R : float
-                Cylinder radius.
+        Parameters
+        ----------
+        eta_Nx : float
+            Convergence parameter for x integration used to determine the discretization order `Nx` by means of the
+            scaling law :math:`N_x = \eta_{N_x} \sqrt{R/L}` which becomes valid when :math:`R \gg L`. The scaling law
+            assumes that the quadrature scheme for x integration has not been changed from the default function.
+            The larger the value of `eta_Nx`, the more accurate the result. Default value is set to `2.` and corresponds
+            to a numerical error of about 1%.
+        Nx : int
+            Discretization order of the quadrature scheme for the x integration. The larger the value, the more accurate
+            the result. Default is `None`. Setting a value here overwrites the value determined by `eta_Nx`.
+        Nz : int
+            Discretization order of the quadrature scheme for the z integration. The larger the value, the more accurate
+            the result. Default is `20` and corresponds to a numerical error of about `10^-4`.
+        eta_mmax : float
+            Convergence parameter to determine `mmax` by means of the scaling law
+            :math:`m_\text{max} = \eta_{m_\text{max}} R/L` which becomes valid when :math:`R \gg L`.
+            The larger the value of `eta_mmax`, the more accurate the result. Default value is set to `10.` and
+            corresponds to a numerical error of about `10^-8`.
+        mmax : int
+            Maximum value of the cylindrical multipole index `m` included in the calculation. The larger the value, the
+            more accurate the result. Default is `None`. Setting a value here overwrites the value determined by
+            `eta_mmax`.
 
-            Returns
-            -------
-            energy : float
-                Casimir energy in units of :math:`k_B T`.
+        Returns
+        -------
+        energy : float
+            Casimir energy in units of :math:`k_B T`.
 
         """
         rho1 = max(self.R1 / self.d, 50.)
