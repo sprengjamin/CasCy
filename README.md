@@ -10,18 +10,31 @@ The separation d between the cylinders is assumed to be much smaller than their 
   <img src="images/geometry.svg" height="60%" width="60%" >
 </p>
 
-If one cylinder radius becomes infinitely large, it becomes a plane. This package also offers a code to calculate the Casimir energu in the limit of the cylinder-plane geometry.
+If one cylinder radius becomes infinitely large, it becomes a plane. This package also offers a code to calculate the Casimir energy in the limit of the cylinder-plane geometry.
 
 ## Installation
 
-The package is written in python and cython.
-It can be easily installed with the package installer [pip](https://pypi.org/project/pip/). First navigate to package folder
+CasCy is written in Python and uses Cython for performance improvements. Note that Cython requires a C compiler to be present on the system.
+The package can be easily installed with the package installer [pip](https://pypi.org/project/pip/). First navigate to package folder
 ```
-cd path_to/cascy_ded
+cd path/to/CasCy
 ```
-and install the package with the command
+If you do not wish to install the package into your base python library, you may want to create a [virtual environment](https://docs.python.org/3/tutorial/venv.html) before installing the package. A virtual environment can be created with
 ```
-pip install -e .
+python -m venv env
+```
+To activate the environment on Unix/MacOS, run:
+```
+source env/bin/activate
+```
+or on Windows,run:
+```
+env/Scripts/activate
+```
+
+Finally, install the package with the command
+```
+pip install .
 ```
 
 ## Usage
@@ -29,7 +42,7 @@ pip install -e .
 The Casimir energy in units of k_B T (T is the system's temperature) between two cylinders of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
 
 ```
-from cascy_ded.cylinder_cylinder import cylinder_cylinder_system
+from CasCy.cylinder_cylinder import cylinder_cylinder_system
 s = cylinder_cylinder_system(d=6.e-9, R1=3.e-9, R2=3.e-9, L=15.e-6)
 print(s.calculate_casimir_energy())
 
@@ -39,7 +52,7 @@ print(s.calculate_casimir_energy())
 The Casimir energy in units of k_B T (T is the system's temperature) between a cylinder of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
 
 ```
-from cascy_ded.plane_cylinder import plane_cylinder_system
+from CasCy.plane_cylinder import plane_cylinder_system
 s = plane_cylinder_system(d=26.e-9, R=12.e-9, L=50.e-6)
 print(s.calculate_casimir_energy())
 
@@ -51,3 +64,4 @@ Further examples can be found in the `examples/` folder. Notice that the package
 
 (wip)
 * make sphinx documentation, finish some of the docstrings
+
