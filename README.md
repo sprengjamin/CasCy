@@ -39,7 +39,7 @@ pip install .
 
 ## Usage
 
-The Casimir energy in units of k_B T (T is the system's temperature) between two cylinders of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
+The Casimir energy in units of k_B T (with the system's temperature T) between two cylinders of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
 
 ```
 from CasCy.cylinder_cylinder import cylinder_cylinder_system
@@ -48,8 +48,12 @@ print(s.calculate_casimir_energy())
 
 >>> -5.12100852917314
 ```
+By default, the resulting value is accurate to about 1%. Thera are optional arguments of the function
+`calculate_casimir_energy()` which can be tuned to improve on the numerical accuracy. For more information see the
+documentation.
 
-The Casimir energy in units of k_B T (T is the system's temperature) between a cylinder of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
+
+The Casimir energy in units of k_B T (with the system's temperature T) between a cylinder of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
 
 ```
 from CasCy.plane_cylinder import plane_cylinder_system
@@ -58,10 +62,19 @@ print(s.calculate_casimir_energy())
 
 >>> -16.777232984640037
 ```
-Further examples can be found in the `examples/` folder. Notice that the package `matplotlib` is required to plot the results there.
+Further examples can be found in the `examples` folder. Notice that the package `matplotlib` is required to plot the results there.
 
 ## Documentation
 
-(wip)
-* make sphinx documentation, finish some of the docstrings
+The documentation contains more information about the classes and functions defined in this package.
+It can be built using [sphinx](https://www.sphinx-doc.org/en/master/).
+First navigate to the documentation folder
+```
+cd docs/
+```
+and execute the command
+```
+make html
+```
+to build the documentation. The html files can be found in the folder `docs/build/html` and they can be viewed with any standard web browser.
 
