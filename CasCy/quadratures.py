@@ -3,7 +3,7 @@
 import numpy as np
 
 def fcqs_semiinfinite(N):
-    r"""Fourier-Chebyshev quadrature rule for integration over the semi-infinite interval (0,oo).
+    r"""Fourier-Chebyshev quadrature rule for integration over the semi-infinite interval (0,oo) defined in Ref. [1].
 
     Parameters
     ----------
@@ -16,6 +16,11 @@ def fcqs_semiinfinite(N):
         quadrature points
     weights : numpy.ndarray
         quadrature weights
+
+    References
+    ----------
+    [1] J. P. Boyd, “Exponentially convergent Fourier-Chebshev quadrature schemes on bounded and infinite intervals”,
+        J. Sci. Comput. 2, 99–109 (1987), DOI: 10.1007/BF01061480.
 
     """
     i = np.arange(1, N + 1, 1)
