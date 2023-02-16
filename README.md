@@ -48,12 +48,12 @@ print(s.calculate_casimir_energy())
 
 >>> -5.12100852917314
 ```
-By default, the resulting value is accurate to about 1%. Thera are optional arguments of the function
-`calculate_casimir_energy()` which can be tuned to improve on the numerical accuracy. For more information see the
+By default, the resulting value is accurate to about 1%. Thera are optional arguments for the function
+`calculate_casimir_energy()` which can be tuned to improve the numerical accuracy. For more information see the
 documentation.
 
 
-The Casimir energy in units of k_B T (with the system's temperature T) between a cylinder of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
+The Casimir energy in units of k_B T (with the system's temperature T) between a plane and a cylinder of radius 3nm and length 15um at a separation of 6nm can be calculated with the following python code:
 
 ```
 from CasCy.plane_cylinder import plane_cylinder_system
