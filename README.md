@@ -27,7 +27,7 @@ To activate the environment on Unix/MacOS, run:
 ```
 source env/bin/activate
 ```
-or on Windows,run:
+or on Windows, run:
 ```
 env/Scripts/activate
 ```
