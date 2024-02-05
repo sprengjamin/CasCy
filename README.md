@@ -80,9 +80,11 @@ to build the documentation. The html files can be found in the folder `docs/buil
 
 ## Citation
 
-If you use this software in your research, please cite the associated paper:
+This software was developed and used in the associated paper:
 
-B. Spreng, H. Berthoumieux, A. Lambrecht, A.-F. Bitbol, P. A. Maia Neto, S. Reynaud, "Universal {{Casimir}} Attraction between Filaments at the Cell Scale," New J. Phys. 26, 013009 (2024). DOI: [10.1088/1367-2630/ad1846](https://doi.org/10.1088/1367-2630/ad1846)
+B. Spreng, H. Berthoumieux, A. Lambrecht, A.-F. Bitbol, P. A. Maia Neto, S. Reynaud, "Universal Casimir Attraction between Filaments at the Cell Scale," New J. Phys. 26, 013009 (2024). DOI: [10.1088/1367-2630/ad1846](https://doi.org/10.1088/1367-2630/ad1846)
+
+If you are using this software in your research, please consider also citing this paper.
 
 ### BibTeX
 
