@@ -78,3 +78,25 @@ make html
 ```
 to build the documentation. The html files can be found in the folder `docs/build/html` and they can be viewed with any standard web browser.
 
+## Citation
+
+If you use this software in your research, please cite the associated paper:
+
+B. Spreng, H. Berthoumieux, A. Lambrecht, A.-F. Bitbol, P. A. Maia Neto, S. Reynaud, "Universal {{Casimir}} Attraction between Filaments at the Cell Scale," New J. Phys. 26, 013009 (2024). DOI: [10.1088/1367-2630/ad1846](https://doi.org/10.1088/1367-2630/ad1846)
+
+### BibTeX
+
+For those who wish to cite the paper in LaTeX:
+
+```bibtex
+@article{SprengUniversalCasimirAttraction2024,
+  title={Universal {{Casimir}} Attraction between Filaments at the Cell Scale},
+  author={Spreng, B. and Berthoumieux, H. and Lambrecht, A. and Bitbol, A.-F. and Maia Neto, P. A. and Reynaud, S.},
+  journal={New J. Phys.},
+  volume={26},
+  number={1},
+  pages={013009},
+  year={2024},
+  doi={10.1088/1367-2630/ad1846}
+}
+
